@@ -573,7 +573,7 @@ function TodayPage(props) {
             <div className="week-chart">
               {days.map((day, index) => <div className="week-bar-column" key={day.key}><div className="week-bar-track"><span className="week-bar-fill" style={{ height: Math.max(5, weekValues[index] / Math.max(1, habits.length) * 100) + "%" }} /></div><span className={day.key === today ? "week-day today" : "week-day"}>{day.label}</span></div>)}
             </div>
-            <div className="week-foot"><span><span className="legend-dot" /> Habits completed</span><strong>{weekTotal} <small>this week</small></strong></div>
+            <div className="week-foot"><span><span className="legend-dot" /> Habits completed</span><strong>{weekValues.reduce((sum, value) => sum + value, 0)} <small>this week</small></strong></div>
           </section>
           <section className="journal-nudge">
             <div className="journal-nudge-icon"><BookOpen size={18} /></div>
