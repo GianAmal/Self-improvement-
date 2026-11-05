@@ -514,7 +514,7 @@ function TodayPage(props) {
   const {
     firstName, preview, habits, logs, priorities, intention, onIntention, onToggleHabit,
     onAddHabit, onNavigate, onPriorityChange, onAddPriority, priorityDraft, setPriorityDraft,
-    completedToday, progress, focusTarget, remaining, running, onToggleTimer, onFocusPage,
+    completedToday, progress, focusTarget, remaining, running, onToggleTimer: onToggle, onFocusPage,
     weekValues, days, journalBody, setJournalBody,
   } = props;
   const greeting = firstName === "there" ? "Make today count." : "Good day, " + firstName + ".";
