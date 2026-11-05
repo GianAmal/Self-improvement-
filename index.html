@@ -11,7 +11,39 @@
     <title>Daymark — Make today count</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="daymark-boot-fallback" role="status" aria-live="polite">
+        <div class="boot-mark"><span></span><span></span><span></span><span></span></div>
+        <strong>Opening Daymark…</strong>
+        <span>Preparing your workspace.</span>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var root = document.getElementById("root");
+        function showStartupError(message) {
+          var fallback = document.getElementById("daymark-boot-fallback");
+          if (!fallback || !root || root.querySelector(".app-shell, .auth-screen, .app-fatal-screen")) return;
+          fallback.innerHTML = '<div class="boot-mark"><span></span><span></span><span></span><span></span></div><strong>Daymark couldn’t start</strong><span>' +
+            String(message || "The app did not finish loading.").replace(/[<>&"]/g, "") +
+            '</span><button onclick="window.location.reload()">Reload app</button>';
+          fallback.classList.add("boot-failed");
+        }
+        window.addEventListener("error", function (event) {
+          if (event.message) showStartupError(event.message);
+          else if (event.target && event.target.tagName === "SCRIPT") showStartupError("The app script could not be loaded.");
+        }, true);
+        window.addEventListener("unhandledrejection", function (event) {
+          var reason = event.reason && event.reason.message ? event.reason.message : "An unexpected startup error occurred.";
+          showStartupError(reason);
+        });
+        window.setTimeout(function () {
+          if (root && document.getElementById("daymark-boot-fallback")) {
+            showStartupError("Loading took longer than expected. Please reload and try again.");
+          }
+        }, 8000);
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
