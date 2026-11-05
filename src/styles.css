@@ -494,3 +494,70 @@ button:disabled { cursor: not-allowed; opacity: .55; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+/* Startup and render diagnostics: never leave a failed app as an empty canvas. */
+#daymark-boot-fallback {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 28px;
+  color: #6c7c63;
+  background: #f5f6f2;
+  font: 11px "DM Sans", sans-serif;
+  text-align: center;
+}
+#daymark-boot-fallback strong {
+  margin-top: 9px;
+  color: #354438;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 27px;
+  font-weight: 400;
+}
+#daymark-boot-fallback > span { max-width: 420px; color: #899487; line-height: 1.6; }
+#daymark-boot-fallback button {
+  margin-top: 12px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  background: #526b4a;
+  font-weight: 700;
+}
+.boot-mark {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  transform: rotate(-8deg);
+}
+.boot-mark span { border-radius: 3px 5px 3px 5px; background: #83986e; }
+.boot-mark span:nth-child(2) { opacity: .68; transform: translateY(3px); }
+.boot-mark span:nth-child(3) { opacity: .82; transform: translateX(3px); }
+.boot-mark span:nth-child(4) { background: #344a39; }
+.app-fatal-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+  padding: 9vw;
+  color: #4c594c;
+  background: #f5f6f2;
+}
+.app-fatal-screen h1 {
+  max-width: 620px;
+  margin: 0;
+  color: #27342b;
+  font: 400 clamp(34px, 5vw, 52px)/1.08 "DM Serif Display", Georgia, serif;
+}
+.app-fatal-screen .fatal-detail {
+  max-width: 650px;
+  overflow-wrap: anywhere;
+  color: #9a685c;
+  font: 11px/1.7 "DM Sans", sans-serif;
+}
